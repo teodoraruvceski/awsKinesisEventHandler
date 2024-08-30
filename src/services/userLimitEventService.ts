@@ -7,44 +7,53 @@ import {
 } from "../eventPayloads";
 import { UserLimitEventType } from "../types/eventTypes/userLimitEvent";
 import IUserLimitRepository from "../repositories/interfaces/userLimitRepositoryInterface";
+import CommandHandler from "../commands/commandHandler";
+import UserLimitCreatedCommand from "../commands/userLimitCreatedCommand";
+import UserLimitProgressUpdatedCommand from "../commands/userLimitProgressUpdatedCommand";
+import UserLimitResetCommand from "../commands/userLimitResetCommand";
 
 export default class UserLimitEventService {
   private userLimitRepository: IUserLimitRepository;
-
+  private commandHandler: CommandHandler;
   constructor(userLimitRepository: IUserLimitRepository) {
     this.userLimitRepository = userLimitRepository;
+    this.commandHandler = new CommandHandler();
   }
 
   public async handle(payload: UserLimitPayloadType, type: UserLimitEventType) {
     try {
       switch (type) {
         case UserLimitEventType.USER_LIMIT_CREATED:
-          payload = payload as UserLimitCreatedPayloadType;
-          if (await this.validateUserLimitCreatedEvent(payload)) {
-            await this.userLimitRepository.addUserLimit(payload);
-          }
+          this.commandHandler.setCommand(
+            new UserLimitCreatedCommand(
+              payload as UserLimitCreatedPayloadType,
+              this.userLimitRepository
+            )
+          );
           break;
 
         case UserLimitEventType.USER_LIMIT_RESET:
           payload = payload as UserLimitResetPayloadType;
-          if (await this.validateUserLimitResetEvent(payload)) {
-            await this.userLimitRepository.resetUserLimit(payload.userLimitId);
-          }
+          this.commandHandler.setCommand(
+            new UserLimitResetCommand(
+              payload as UserLimitResetPayloadType,
+              this.userLimitRepository
+            )
+          );
           break;
         case UserLimitEventType.USER_LIMIT_PROGRESS_CHANGED:
           payload = payload as UserLimitProgressChangedPayloadType;
-          if (await this.validateUserLimitProgressChangedEvent(payload)) {
-            const newProgress =
-              Number(payload.amount) + Number(payload.previousProgress);
-            await this.userLimitRepository.updateProgressUserLimit(
-              payload.userLimitId,
-              newProgress.toString()
-            );
-          }
+          this.commandHandler.setCommand(
+            new UserLimitProgressUpdatedCommand(
+              payload as UserLimitProgressChangedPayloadType,
+              this.userLimitRepository
+            )
+          );
           break;
         default:
           console.log("ERROR: Event Type not found.");
       }
+      this.commandHandler.handleCommand();
     } catch (error) {
       console.log("ERROR: Event Type not found.");
     }
