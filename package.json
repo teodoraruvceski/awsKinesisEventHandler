@@ -1,0 +1,27 @@
+{
+  "name": "typescript-node-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.ts",
+  "scripts": {
+    "start": "ts-node ./src/index.ts",
+    "dev": "nodemon  --exec ts-node --config nodemon.json ./src/index.ts",
+    "build": "tsc -p ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/node": "^16.11.12",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.3"
+  },
+  "dependencies": {
+    "@tshio/command-bus": "^1.0.4",
+    "aws-lambda": "^1.0.7",
+    "uuidv4": "^6.2.13",
+    "yup": "^1.4.0"
+  }
+}
