@@ -35,7 +35,7 @@ Before you begin, ensure that Docker is installed on your system and the Docker 
 
 1. What did you like about the task and what didn't? Can we improve it and how?
 
-I appreciated the opportunity to get to know AWS Kinesis and to try and impolement handler for managing events specific to projects your company is working on. The event-driven architecture is an interesting and modern way to structure systems.
+I appreciated the opportunity to get to know AWS Kinesis and to try and implement handler for managing events specific to projects your company is working on. The event-driven architecture is an interesting and modern way to structure systems.
 
 The task provided a good balance of practical implementation and architectural considerations. Working with different event types allowed for a comprehensive exploration of event handling in a real-world scenario.
 
