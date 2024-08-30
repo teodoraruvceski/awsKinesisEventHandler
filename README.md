@@ -35,11 +35,11 @@ Before you begin, ensure that Docker is installed on your system and the Docker 
 
 1. What did you like about the task and what didn't? Can we improve it and how?
 
-I appreciated the opportunity to get to know more about AWS Kinesis and totry and impolement handler for managing events specific to your work. The event-driven architecture is an interesting and modern way to structure systems.
+I appreciated the opportunity to get to know AWS Kinesis and to try and impolement handler for managing events specific to projects your company is working on. The event-driven architecture is an interesting and modern way to structure systems.
 
 The task provided a good balance of practical implementation and architectural considerations. Working with different event types allowed for a comprehensive exploration of event handling in a real-world scenario.
 
-To improve the task, we could consider adding more complex scenarios, such as handling concurrent events or dealing with out-of-order event processing. Additionally, incorporating error handling for edge cases like missing or invalid event data could make the task even more robust and realistic.
+To improve the task, we could consider adding error handling for edge cases like missing or invalid event data could make the task even more robust and realistic.
 
 Furthermore, it would be beneficial to describe the constraints that need to be implemented when modifying data in the database during specific events. This would provide a clearer understanding of the business rules and data integrity requirements, ensuring that the implementation accurately reflects real-world scenarios and maintains data consistency across different event types.
 
@@ -55,7 +55,7 @@ Sub-tasks involved in this change:
 
 a. Set up a MongoDB database and establish a connection from the application.
 b. Create a MongoDB schema for the `UserLimit` model.
-c. Switch repository to use different interface imlementation(to use MongoDB operations instead of in-memory storage).
+c. Switch repository pattern classes to use different interface implementation(to use MongoDB operations instead of in-memory storage).
 d. Implement pagination and sorting in the repository for efficient data retrieval.
 e. Create new API endpoints for fetching user limits for front-end display.
 f. Implement caching mechanisms to optimize frequent read operations.
