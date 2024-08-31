@@ -58,31 +58,4 @@ export default class UserLimitEventService {
       console.log("ERROR: Event Type not found.");
     }
   }
-
-  private async validateUserLimitCreatedEvent(
-    payload: UserLimitCreatedPayloadType
-  ) {
-    return validateSchema<UserLimitCreatedPayloadType>(
-      payload,
-      UserLimitEventType.USER_LIMIT_CREATED
-    );
-  }
-
-  private async validateUserLimitResetEvent(
-    payload: UserLimitResetPayloadType
-  ) {
-    return validateSchema<UserLimitResetPayloadType>(
-      payload,
-      UserLimitEventType.USER_LIMIT_RESET
-    );
-  }
-
-  private async validateUserLimitProgressChangedEvent(
-    payload: UserLimitProgressChangedPayloadType
-  ) {
-    return validateSchema<UserLimitProgressChangedPayloadType>(
-      payload,
-      UserLimitEventType.USER_LIMIT_PROGRESS_CHANGED
-    );
-  }
 }
