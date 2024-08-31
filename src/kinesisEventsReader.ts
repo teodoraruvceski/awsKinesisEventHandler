@@ -3,13 +3,7 @@ import {
   UserLimitEventType,
 } from "./types/eventTypes/userLimitEvent";
 import UserLimitEventService from "./services/userLimitEventService";
-import {
-  KinesisStreamEvent,
-  Context,
-  KinesisStreamHandler,
-  KinesisStreamRecordPayload,
-  KinesisStreamRecord,
-} from "aws-lambda";
+import { KinesisStreamEvent, KinesisStreamRecord } from "aws-lambda";
 
 type ExtendedKinesisStreamRecord = KinesisStreamRecord & {
   type: UserLimitEventType;
