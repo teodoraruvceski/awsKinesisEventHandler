@@ -61,3 +61,48 @@ e. Create new API endpoints for fetching user limits for front-end display.
 f. Implement caching mechanisms to optimize frequent read operations.
 g. Add database migration scripts for future schema changes.
 h. Implement proper error handling and logging for database operations.
+
+3. What you would suggest for an API to return this data to front-end for a user? What would be the API signature?
+
+For an API to return user limit data to the front-end, I suggest implementing a RESTful API endpoint. The API signature could look like this:
+
+GET /api/user-limits/:userId
+
+Response:
+{
+"userLimits": [
+{
+"userLimitId": string,
+"brandId": string,
+"userId": string,
+"type": LimitType,
+"period": LimitPeriod,
+"value": string,
+"progress": string,
+"status": LimitStatus,
+"currencyCode": string,
+"activeFrom": number,
+"activeUntil": number,
+"nextResetTime": number
+}
+]
+}
+
+This endpoint would return an array of user limits for a specific user, including all relevant information.
+
+4. How did/could you implement it so it’s possible to re-use it for other similar use cases?
+
+The current implementation is designed with reusability in mind:
+
+- The use of interfaces (IUserLimitRepository) allows for easy swapping of storage mechanisms.
+- The Command pattern (CommandHandler, UserLimitCreatedCommand, etc.) makes it simple to add new event types and their corresponding actions.
+- The UserLimitEventService acts as a facade, abstracting the complexity of event handling.
+
+To further enhance reusability:
+
+- Implement a generic EventService interface that UserLimitEventService could implement.
+- Create a factory for generating appropriate EventService instances based on event types.
+- Use dependency injection for the repository and command handler to make the system more modular and testable.
+- Implement a generic EventPayload interface to standardize payload structures across different event types.
+
+These changes would make it easier to adapt the system for handling other types of events beyond user limits, while maintaining a consistent architecture.
